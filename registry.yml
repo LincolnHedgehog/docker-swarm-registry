@@ -2,10 +2,10 @@ version: '3'
 services:
   registry:
     image: registry:2
-    ports:
-      - 5000:5000
     volumes:
-      - /containers/registry:/var/lib/registry
+      - ./registry:/var/lib/registry
+    networks:
+      - registry
     deploy:
       mode: replicated
       replicas: 1
@@ -16,8 +16,16 @@ services:
           - node.role == manager
   nginx:
     image: nginx:alpine
+    networks:
+      - registry
     ports:
       - 443:443
     volumes:
-      - /auth:/auth
-      - /certs:/certs
+      - ./auth:/auth
+      - ./certs:/certs
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      placement:
+        constraints:
+          - node.role == manager
+networks:
+  registry:
