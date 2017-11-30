@@ -2,6 +2,10 @@
 
 Source: https://github.com/docker/docker.github.io/blob/master/registry/recipes/nginx.md
 
+This repo will get you started with a Docker Registry with https and auth.
+My goal was to set up a private registry by my own (using Docker only).
+I will use this repository for my continuous deployment pipeline. 
+
 Git clone this repo,
 
 If you already have certs, copy them to certs folder.
