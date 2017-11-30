@@ -9,8 +9,8 @@ main(){
   read PASSWORD
   stty echo
   printf "\n"
-  htpasswd -b $DESTINATION $USERNAME $PASSWORD
-  cat auth/htpasswd
+  docker run --rm --entrypoint htpasswd registry:2 -Bbn $USERNAME $PASSWORD > $DESTINATION
+  cat $DESTINATION
 }
 
 main
